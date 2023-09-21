@@ -1,22 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { getFoodList } from "../../Services/FoodListApi"
 
 
 const FoodList = () => {
-    const [foodItems, setFoodItems] = useState([])
-
+    const { foodItems } = useSelector(state => state.foodList)
+    const dispatch = useDispatch();
     useEffect(() => {
-        getFoodDetails()
-    }, [])
+        dispatch(getFoodList())
+    }, [dispatch])
 
-    const getFoodDetails = async () => {
-        const response = await fetch("http://localhost:4000/foodList", {
-            method: "GET", // *GET, POST, PUT, DELETE, etc.
-        })
-        const data = await response.json();
-        setFoodItems(data)
-    }
-
-
+  console.log(foodItems)
     return (
         <table style={{ width: 500 }}>
             <thead>

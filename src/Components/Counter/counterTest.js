@@ -3,9 +3,9 @@ import Counter from "./index";
 
 
 describe("testing the counter component",()=>{
-    it("should render a counter with value of 1",()=>{
+    it("should count the number of button used",()=>{
         render(<Counter/>)
-        const basicButton = screen.getByRole('button');
-        expect(basicButton).toHaveValue(1)
+        const basicButton = screen.getAllByRole('button');
+        expect(basicButton).toHaveValue(2)
     })
 })
