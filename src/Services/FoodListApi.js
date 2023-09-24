@@ -5,7 +5,7 @@ import {employeeListSuccess , employeeListFailure, employeeListInitialLoad } fro
 const getFoodList = () => {
     return dispatch => {
         dispatch(foodListInitialLoad(true));
-        fetch(`${ApiBaseURL}/foodList`, {
+        fetch(`${ApiBaseURL}/foodMenu`, {
             method: "GET", // *GET, POST, PUT, DELETE, etc.
         }).then(res => res.json())
             .then(data => {
