@@ -36,3 +36,34 @@
     transform: rotate(360deg);
   }
 }
+
+.card-section {
+  display: flex;
+  gap: 2rem 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.card-sector{
+  border:2px solid black;
+  padding: 10px;
+  width:28%;
+}
+
+.btn-container{
+  background-color:  rgb(115, 145, 190);
+  border:1px solid rgb(36, 36, 143);
+  padding:5px;
+  color:white;
+  margin: auto 2px;
+  width:10%
+}
+
+.category{
+  margin:20px;
+}
+
+.title-food{
+  font-size: 20px;
+  font-weight: bold;
+  text-transform:capitalize;
+}
