@@ -1,10 +1,25 @@
 import React ,{useEffect} from "react";
 import { useDispatch,useSelector } from "react-redux";
-import { getEmployeeDetails } from "../../Services/FoodListApi"
+import { getEmployeeDetails , postEmployeeDetails} from "../../Services/FoodListApi"
+import FormDetails from "./FormDetails";
+import { v4 as uuid } from 'uuid';
 
 const EmployeeList =() =>{
 const dispatch = useDispatch();
 const {employeeList} = useSelector(state => state.employeeListDetails)
+
+
+
+const handleSubmit = (input) =>{
+    const uniqueId = uuid();
+    const data ={
+        id :uniqueId,
+        ...input
+    }
+    dispatch(postEmployeeDetails(data))
+    console.log(data)
+   
+}
 
 useEffect(() => {
     dispatch(getEmployeeDetails())
@@ -12,6 +27,8 @@ useEffect(() => {
 
 console.log(employeeList)
 return(
+    <>
+     <FormDetails handleSubmit={handleSubmit} />
     <table>
         <thead>
             <tr>
@@ -34,6 +51,8 @@ return(
                 </tr>))}
         </tbody>
     </table>
+    </>
+   
 );
 }
 

@@ -1,6 +1,6 @@
 import ApiBaseURL from './apiConfig';
 import { foodListSuccess, foodListFailure, foodListInitialLoad } from "../Redux/actions/foodListAction";
-import {employeeListSuccess , employeeListFailure, employeeListInitialLoad } from "../Redux/actions/employeeListAction"
+import { employeeListSuccess, employeeListFailure, employeeListInitialLoad } from "../Redux/actions/employeeListAction"
 
 const getFoodList = () => {
     return dispatch => {
@@ -21,20 +21,42 @@ const getFoodList = () => {
 
 const getEmployeeDetails = () => {
     return dispatch => {
-        dispatch (employeeListInitialLoad(true))
-         fetch(`${ApiBaseURL}/employeeDetails`, {
-            method:"GET"
-         })
-         .then(res => res.json())
-         .then((data) => {
-            dispatch(employeeListSuccess(data))
-            dispatch (employeeListInitialLoad(false))
-         })
-         .catch((err)=>{
-            dispatch(employeeListFailure(err))
-            dispatch (employeeListInitialLoad(false))
-         })
+        dispatch(employeeListInitialLoad(true))
+        fetch(`${ApiBaseURL}/employeeDetails`, {
+            method: "GET"
+        })
+            .then(res => res.json())
+            .then((data) => {
+                dispatch(employeeListSuccess(data))
+                dispatch(employeeListInitialLoad(false))
+            })
+            .catch((err) => {
+                dispatch(employeeListFailure(err))
+                dispatch(employeeListInitialLoad(false))
+            })
     }
-  
 }
-export { getFoodList , getEmployeeDetails};
+      
+const postEmployeeDetails = (input) => {
+    return dispatch => {
+        dispatch(employeeListInitialLoad(true))
+        fetch(`${ApiBaseURL}/employeeDetails`, {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(input)
+        })
+            .then(res => res.json())
+            .then((data) => {
+                dispatch(employeeListSuccess(data))
+                dispatch(employeeListInitialLoad(false))
+            })
+            .catch((err) => {
+                dispatch(employeeListFailure(err))
+                dispatch(employeeListInitialLoad(false))
+            })
+    }
+}
+export { getFoodList, getEmployeeDetails, postEmployeeDetails };
